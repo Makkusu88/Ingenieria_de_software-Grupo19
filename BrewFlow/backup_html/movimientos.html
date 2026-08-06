@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>BrewFlow - Historial movimientos</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6"><div id="mensaje" class="hidden"></div><section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><div class="p-4 border-b border-gray-700"><h3 class="font-semibold">Últimos 100 movimientos</h3></div><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">Fecha</th><th class="p-3 text-left">Tipo</th><th class="p-3 text-left">Motivo</th><th class="p-3 text-left">Producto</th><th class="p-3 text-left">Lote</th><th class="p-3 text-left">Proveedor</th><th class="p-3 text-left">Cantidad</th><th class="p-3 text-left">Usuario</th></tr></thead><tbody id="tabla"></tbody></table></div></section></main>
+  <script src="app-common.js"></script>
+  <script>montarLayout('Historial movimientos', 'Evidencia transaccional de ingresos y salidas de stock.');
+async function cargar(){ const data=await api('/api/movimientos',{headers:authHeaders}); document.getElementById('tabla').innerHTML=data.map(m=>`<tr class="border-t border-gray-700"><td class="p-3">${new Date(m.movimiento_fecha).toLocaleString('es-CL')}</td><td class="p-3">${m.movimiento_tipo}</td><td class="p-3">${m.movimiento_motivo||'-'}</td><td class="p-3">${m.producto_codigo} - ${m.producto_nombre}</td><td class="p-3">${m.lote_codigo||'-'}</td><td class="p-3">${m.proveedor_nombre||'-'}</td><td class="p-3">${formatoNumero(m.movimiento_cantidad)}</td><td class="p-3">${m.usuario_correo||'-'}</td></tr>`).join('') || '<tr><td class="p-3 text-gray-400" colspan="8">Sin movimientos registrados</td></tr>'; }
+cargar().catch(e=>setMensaje('mensaje',e.message,false));
+</script>
+</body></html>

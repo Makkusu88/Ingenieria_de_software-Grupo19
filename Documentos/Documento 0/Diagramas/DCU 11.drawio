@@ -1,0 +1,72 @@
+<mxfile host="Electron">
+  <diagram name="Página-1" id="3OeCnE92zuYGt708bRvG">
+    <mxGraphModel dx="1398" dy="825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pLYArLvUaCcCDYAd0Leh-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="450" width="520" x="120" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" value="Sistema BrewFlow" vertex="1">
+          <mxGeometry height="400" width="240" x="330" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-2" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-3" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-4" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-5" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-6" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-7" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelPosition=center;align=center;fillColor=none;" value="Garzón" vertex="1">
+          <mxGeometry height="80" width="40" x="170" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-8" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-9" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-10" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-11" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;" value="Administrador" vertex="1">
+          <mxGeometry height="80" width="40" x="160" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando pedidos en local" vertex="1">
+          <mxGeometry height="50" width="153.75" x="378.13" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Modificando pedido" vertex="1">
+          <mxGeometry height="30" width="153.75" x="378.13" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando pedidos adicionales" vertex="1">
+          <mxGeometry height="40" width="153.75" x="378.13" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-18" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Cancelando pedidos o ítems" vertex="1">
+          <mxGeometry height="40" width="153.75" x="378.13" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-21" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Visualizando estados&lt;div&gt;de pedidos&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="153.75" x="378.13" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-24" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Consultando historial de modificaciones" vertex="1">
+          <mxGeometry height="45" width="153.75" x="378.13" y="377.5" as="geometry" />
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-25" edge="1" parent="1" source="NvR21T5kpFIDvptHMAPH-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="NvR21T5kpFIDvptHMAPH-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NvR21T5kpFIDvptHMAPH-27" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando tiempos operativos" vertex="1">
+          <mxGeometry height="40" width="153.75" x="378.13" y="430" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

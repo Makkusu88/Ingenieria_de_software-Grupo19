@@ -1,0 +1,58 @@
+<mxfile host="Electron">
+  <diagram name="Página-1" id="PAJAMMhRDFw_rgbbdVoZ">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Wrncm-Rr8fVeA20pCdV4-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="440" width="520" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" value="Sistema BrewFlow" vertex="1">
+          <mxGeometry height="370" width="240" x="310" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-2" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-3" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-4" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-7" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelPosition=center;align=center;fillColor=none;" value="Personal Cocina" vertex="1">
+          <mxGeometry height="80" width="40" x="150" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-8" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="358.1300000000001" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-9" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="358.1300000000001" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-10" edge="1" parent="1" source="Mg7NjcOmwHO1j4Ff1UPX-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Mg7NjcOmwHO1j4Ff1UPX-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="358.1300000000001" y="795" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-12" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;" value="Personal Barra" vertex="1">
+          <mxGeometry height="80" width="40" x="140" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Visualizando ítems asignados a cocina" vertex="1">
+          <mxGeometry height="70" width="153.75" x="358.13" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando incidencias operativas" vertex="1">
+          <mxGeometry height="70" width="153.75" x="358.13" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Marcando ítems listos para entrega" vertex="1">
+          <mxGeometry height="70" width="153.75" x="358.13" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="Mg7NjcOmwHO1j4Ff1UPX-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Visualizando ítems asignados a barra" vertex="1">
+          <mxGeometry height="70" width="153.75" x="358.13" y="515" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

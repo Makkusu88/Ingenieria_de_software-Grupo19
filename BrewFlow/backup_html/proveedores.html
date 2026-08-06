@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Proveedores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <section class="bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6"><h3 class="font-semibold text-lg mb-4">Registrar proveedor</h3><form id="form" class="grid gap-4 md:grid-cols-2"><input name="rut" required placeholder="RUT proveedor" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="nombre" required placeholder="Nombre proveedor" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="contacto_nom" placeholder="Nombre contacto" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="contacto_tel" placeholder="Teléfono contacto" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="contacto_correo" type="email" placeholder="Correo contacto" class="bg-gray-700 rounded p-2 border border-gray-600"><textarea name="condiciones_comerciales" placeholder="Condiciones comerciales" class="bg-gray-700 rounded p-2 border border-gray-600"></textarea><button class="md:col-span-2 bg-amber-500 text-gray-950 font-semibold rounded p-2">Registrar proveedor</button></form></section><section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">RUT</th><th class="p-3 text-left">Proveedor</th><th class="p-3 text-left">Contacto</th><th class="p-3 text-left">Correo</th><th class="p-3 text-left">Condiciones</th><th class="p-3 text-left">Estado</th></tr></thead><tbody id="tabla"></tbody></table></div></section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Proveedores', 'UR 2.2: datos de identificación, contacto y condiciones comerciales sin duplicidad.');
+    
+async function cargar(){ const data=await api('/api/proveedores',{headers:authHeaders}); document.getElementById('tabla').innerHTML=data.map(p=>`<tr class="border-t border-gray-700"><td class="p-3">${p.proveedor_rut}</td><td class="p-3 font-medium">${p.proveedor_nombre}</td><td class="p-3">${p.proveedor_nombre_contacto||'-'}<br><span class="text-gray-400">${p.proveedor_telefono_contacto||''}</span></td><td class="p-3">${p.proveedor_correo_contacto||'-'}</td><td class="p-3 max-w-xs">${p.proveedor_condiciones_comerciales||'-'}</td><td class="p-3">${p.proveedor_estado}</td></tr>`).join(''); }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const body=Object.fromEntries(new FormData(e.target).entries()); try{ await api('/api/proveedores',{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Proveedor registrado en PostgreSQL'); e.target.reset(); cargar(); }catch(err){setMensaje('mensaje',err.message,false);} });
+cargar().catch(e=>setMensaje('mensaje',e.message,false));
+
+  </script>
+</body>
+</html>

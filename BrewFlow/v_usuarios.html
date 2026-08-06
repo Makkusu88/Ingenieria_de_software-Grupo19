@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Usuarios y roles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <div class="mb-4">
+      <button id="btnAgregar" type="button" class="bg-amber-500 text-gray-950 font-semibold rounded px-4 py-2 hover:bg-amber-600 transition">Agregar nuevo usuario</button>
+    </div>
+    <section id="formSection" class="hidden bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6">
+  <h3 class="font-semibold text-lg mb-4">Registrar usuario</h3>
+  <form id="form" class="grid gap-4 md:grid-cols-2">
+    <input name="run" required placeholder="RUN" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <input name="nombres" required placeholder="Nombres" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <input name="ap_paterno" required placeholder="Apellido paterno" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <input name="ap_materno" placeholder="Apellido materno" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <input name="correo" required type="email" placeholder="correo@brewflow.cl" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <input name="contrasena" required type="password" placeholder="Contraseña" class="bg-gray-700 rounded p-2 border border-gray-600">
+    <select name="rol_id" id="roles" required class="bg-gray-700 rounded p-2 border border-gray-600"></select>
+    <select name="estado" class="bg-gray-700 rounded p-2 border border-gray-600"><option value="activo">Activo</option><option value="inactivo">Inactivo</option></select>
+    <button class="md:col-span-2 bg-amber-500 text-gray-950 font-semibold rounded p-2 hover:bg-amber-600">Crear usuario</button>
+  </form>
+</section>
+<section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">RUN</th><th class="p-3 text-left">Nombre</th><th class="p-3 text-left">Correo</th><th class="p-3 text-left">Rol</th><th class="p-3 text-left">Estado</th><th class="p-3 text-left">Acción</th></tr></thead><tbody id="tabla"></tbody></table></div></section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Usuarios y roles', 'UR 1.1 y UR 1.2: autenticación, estado activo y perfiles diferenciados.');
+    const formSection = document.getElementById('formSection');
+    const btnAgregar = document.getElementById('btnAgregar');
+    if (btnAgregar && formSection) {
+      btnAgregar.addEventListener('click', () => {
+        formSection.classList.toggle('hidden');
+        btnAgregar.textContent = formSection.classList.contains('hidden') ? 'Agregar nuevo usuario' : 'Ocultar formulario';
+      });
+    }
+
+    
+async function cargarRoles(){ const roles=await api(`${API_URL}/api/admin/usuarios/roles`,{headers:authHeaders}); document.getElementById('roles').innerHTML=roles.map(r=>`<option value="${r.rol_id}">${r.rol_nombre}</option>`).join(''); }
+async function cargar(){ const data=await api(`${API_URL}/api/admin/usuarios`,{headers:authHeaders}); document.getElementById('tabla').innerHTML=data.map(u=>`<tr class="border-t border-gray-700"><td class="p-3">${u.usuario_run}</td><td class="p-3">${u.usuario_nombres} ${u.usuario_apellido_paterno}</td><td class="p-3">${u.usuario_correo}</td><td class="p-3">${u.rol_nombre}</td><td class="p-3">${u.usuario_estado_cuenta}</td><td class="p-3"><button onclick="cambiar(${u.usuario_id},'${u.usuario_estado_cuenta==='activo'?'inactivo':'activo'}')" class="bg-gray-700 hover:bg-gray-600 rounded px-3 py-1">${u.usuario_estado_cuenta==='activo'?'Inactivar':'Activar'}</button></td></tr>`).join(''); }
+async function cambiar(id,estado){ try{ await api(`${API_URL}/api/admin/usuarios/${id}/estado`,{method:'PATCH',headers:jsonHeaders,body:JSON.stringify({estado})}); cargar(); }catch(e){setMensaje('mensaje',e.message,false);} }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const f=new FormData(e.target); const body=Object.fromEntries(f.entries()); body.rol_id=Number(body.rol_id); try{ await api(`${API_URL}/api/admin/usuarios`,{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Usuario creado en PostgreSQL'); e.target.reset(); await cargar(); }catch(err){setMensaje('mensaje',err.message,false);} });
+Promise.all([cargarRoles(),cargar()]).catch(e=>setMensaje('mensaje',e.message,false));
+
+  </script>
+</body>
+</html>

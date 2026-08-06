@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewFlow - Insumos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    <nav class="bg-gray-800 border-b border-gray-700 px-6 py-4 flex flex-col md:flex-row gap-3 md:justify-between md:items-center">
+        <div class="flex items-center space-x-4"><span class="text-2xl font-bold text-amber-500">BrewFlow</span><span class="bg-amber-500/10 text-amber-400 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-500/20">INVENTARIO</span></div>
+        <div class="flex flex-wrap items-center gap-4 text-sm">
+            <a href="dashboard.html" class="text-gray-400 hover:text-white transition">Dashboard</a>
+            <a href="usuarios.html" class="text-gray-400 hover:text-white transition">Usuarios</a>
+            <a href="proveedores.html" class="text-gray-400 hover:text-white transition">Proveedores</a>
+            <a href="insumos.html" class="text-amber-500 font-medium">Insumos</a>
+            <a href="lotes.html" class="text-gray-400 hover:text-white transition">Lotes</a>
+            <a href="salon.html" class="text-gray-400 hover:text-white transition">Salón</a>
+            <a id="logoutLink" href="login.html" class="text-red-400 hover:text-red-300 transition">Cerrar sesión</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div><h1 class="text-2xl font-bold">Gestión de insumos</h1><p class="text-gray-400 text-sm mt-1">Registro y consulta de existencias base.</p></div>
+            <button id="toggleForm" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold px-4 py-2 rounded-md text-sm">+ Nuevo insumo</button>
+        </div>
+        <div id="status" class="hidden rounded-lg p-4 mb-6 text-sm"></div>
+
+        <section id="formPanel" class="hidden bg-gray-800 p-6 rounded-lg border border-gray-700 mb-6 shadow-lg">
+            <h2 class="text-lg font-semibold mb-4">Registrar insumo</h2>
+            <form id="insumoForm" class="grid gap-4 sm:grid-cols-2">
+                <label class="text-sm text-gray-300">Nombre<input name="nombre" required class="mt-1 w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"></label>
+                <label class="text-sm text-gray-300">Unidad<select name="unidad_medida" id="unidadSelect" required class="mt-1 w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"></select></label>
+                <label class="text-sm text-gray-300">Stock actual<input name="stock_actual" type="number" min="0" value="0" required class="mt-1 w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"></label>
+                <label class="text-sm text-gray-300">Stock crítico<input name="stock_critico" type="number" min="0" value="0" required class="mt-1 w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"></label>
+                <label class="text-sm text-gray-300 sm:col-span-2">Producto asociado opcional<select name="producto_id" id="productoSelect" class="mt-1 w-full px-3 py-2 rounded-md bg-gray-700 border border-gray-600 text-white"><option value="">Sin producto asociado</option></select></label>
+                <div class="sm:col-span-2 flex gap-3"><button class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold px-4 py-2 rounded-md">Guardar</button><button type="button" id="cancelForm" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Cancelar</button></div>
+            </form>
+        </section>
+
+        <section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden shadow-lg">
+            <div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-gray-750 text-gray-400 uppercase text-xs"><tr><th class="px-6 py-3">Insumo</th><th class="px-6 py-3">Producto</th><th class="px-6 py-3">Categoría</th><th class="px-6 py-3">Stock actual</th><th class="px-6 py-3">Stock crítico</th><th class="px-6 py-3">Estado</th></tr></thead><tbody id="insumosBody" class="divide-y divide-gray-700"></tbody></table></div>
+        </section>
+    </main>
+
+    <script>
+        const token = localStorage.getItem('brewflow_token');
+        if (!token) window.location.href = 'login.html';
+        const authHeaders = { 'Authorization': `Bearer ${token}` };
+        const status = document.getElementById('status');
+        const showStatus = (message, type='success') => { status.textContent = message; status.className = `rounded-lg p-4 mb-6 text-sm ${type==='error'?'bg-red-900 text-red-200 border border-red-500':'bg-green-900 text-green-200 border border-green-500'}`; status.classList.remove('hidden'); };
+
+        async function cargarSelects() {
+            const [unidadesRes, productosRes] = await Promise.all([
+                fetch('/api/unidades', { headers: authHeaders }),
+                fetch('/api/productos', { headers: authHeaders })
+            ]);
+            const unidades = await unidadesRes.json();
+            const productos = await productosRes.json();
+            document.getElementById('unidadSelect').innerHTML = unidades.map(u => `<option value="${u}">${u}</option>`).join('');
+            document.getElementById('productoSelect').innerHTML = '<option value="">Sin producto asociado</option>' + productos.map(p => `<option value="${p.producto_id}">${p.producto_nombre} (${p.producto_categoria || 'Sin categoría'})</option>`).join('');
+        }
+
+        async function cargarInsumos() {
+            try {
+                const response = await fetch('/api/insumos', { headers: authHeaders });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'Error al cargar insumos');
+                document.getElementById('insumosBody').innerHTML = data.map(i => {
+                    const critico = Number(i.insumo_stock_actual) <= Number(i.insumo_stock_critico);
+                    return `<tr class="hover:bg-gray-750/50"><td class="px-6 py-4 font-medium text-white">${i.insumo_nombre}</td><td class="px-6 py-4 text-gray-300">${i.producto_nombre || 'Sin producto'}</td><td class="px-6 py-4 text-gray-300">${i.producto_categoria || '-'}</td><td class="px-6 py-4 text-gray-300">${i.insumo_stock_actual} ${i.insumo_unidad_medida}</td><td class="px-6 py-4 text-gray-300">${i.insumo_stock_critico} ${i.insumo_unidad_medida}</td><td class="px-6 py-4">${critico ? '<span class="px-2 py-1 rounded text-xs bg-red-900/40 text-red-300 border border-red-500/20">Crítico</span>' : '<span class="px-2 py-1 rounded text-xs bg-green-900/40 text-green-300 border border-green-500/20">Normal</span>'}</td></tr>`;
+                }).join('') || '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-400">No hay insumos registrados.</td></tr>';
+            } catch (error) { showStatus(error.message, 'error'); }
+        }
+
+        document.getElementById('toggleForm').addEventListener('click', () => document.getElementById('formPanel').classList.remove('hidden'));
+        document.getElementById('cancelForm').addEventListener('click', () => document.getElementById('formPanel').classList.add('hidden'));
+        document.getElementById('insumoForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            const body = Object.fromEntries(fd.entries());
+            body.stock_actual = Number(body.stock_actual);
+            body.stock_critico = Number(body.stock_critico);
+            body.producto_id = body.producto_id ? Number(body.producto_id) : null;
+            try {
+                const response = await fetch('/api/insumos', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders }, body: JSON.stringify(body) });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'Error al registrar insumo');
+                showStatus(data.message);
+                e.target.reset();
+                document.getElementById('formPanel').classList.add('hidden');
+                cargarInsumos();
+            } catch (error) { showStatus(error.message, 'error'); }
+        });
+        document.getElementById('logoutLink').addEventListener('click', () => localStorage.clear());
+        cargarSelects().then(cargarInsumos).catch(() => showStatus('No se pudieron cargar catálogos iniciales', 'error'));
+    </script>
+</body>
+</html>

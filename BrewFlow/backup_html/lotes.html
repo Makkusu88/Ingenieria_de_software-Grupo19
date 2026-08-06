@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Lotes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <section class="bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6"><h3 class="font-semibold text-lg mb-4">Registrar lote asociado a producto y proveedor</h3><form id="form" class="grid gap-4 md:grid-cols-3"><input name="lote_codigo" required placeholder="Código de lote" class="bg-gray-700 rounded p-2 border border-gray-600"><select name="producto_id" id="productos" required class="bg-gray-700 rounded p-2 border border-gray-600"></select><select name="proveedor_id" id="proveedores" required class="bg-gray-700 rounded p-2 border border-gray-600"></select><select name="ubicacion_id" id="ubicaciones" class="bg-gray-700 rounded p-2 border border-gray-600"><option value="">Sin ubicación</option></select><input name="cantidad_ingresada" type="number" min="0.01" step="0.01" required placeholder="Cantidad disponible" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="fecha_recepcion" type="date" required class="bg-gray-700 rounded p-2 border border-gray-600"><input name="fecha_vencimiento" type="date" required class="bg-gray-700 rounded p-2 border border-gray-600"><input name="observacion" placeholder="Observación" class="md:col-span-2 bg-gray-700 rounded p-2 border border-gray-600"><button class="bg-amber-500 text-gray-950 font-semibold rounded p-2">Registrar lote</button></form></section><section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">Lote</th><th class="p-3 text-left">Producto</th><th class="p-3 text-left">Proveedor</th><th class="p-3 text-left">Ubicación</th><th class="p-3 text-left">Cantidad</th><th class="p-3 text-left">Ingreso</th><th class="p-3 text-left">Vencimiento</th><th class="p-3 text-left">Estado</th></tr></thead><tbody id="tabla"></tbody></table></div></section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Lotes', 'UR 3.2, UR 4.1 y UR 4.2: lote, proveedor, fechas y stock.');
+    
+async function cargarSelects(){ const [productos,proveedores,ubicaciones]=await Promise.all([api('/api/productos',{headers:authHeaders}),api('/api/proveedores',{headers:authHeaders}),api('/api/ubicaciones',{headers:authHeaders})]); document.getElementById('productos').innerHTML=productos.filter(p=>p.producto_estado==='activo').map(p=>`<option value="${p.producto_id}">${p.producto_codigo} - ${p.producto_nombre}</option>`).join(''); document.getElementById('proveedores').innerHTML=proveedores.filter(p=>p.proveedor_estado==='activo').map(p=>`<option value="${p.proveedor_id}">${p.proveedor_nombre}</option>`).join(''); document.getElementById('ubicaciones').innerHTML='<option value="">Sin ubicación</option>'+ubicaciones.filter(u=>u.ubicacion_estado==='activo').map(u=>`<option value="${u.ubicacion_id}">${u.ubicacion_codigo} - ${u.ubicacion_nombre}</option>`).join(''); }
+async function cargar(){ const data=await api('/api/lotes',{headers:authHeaders}); document.getElementById('tabla').innerHTML=data.map(l=>`<tr class="border-t border-gray-700"><td class="p-3">${l.lote_codigo}</td><td class="p-3">${l.producto_nombre||'-'}</td><td class="p-3">${l.proveedor_nombre||'-'}</td><td class="p-3">${l.ubicacion_codigo||'-'}</td><td class="p-3">${formatoNumero(l.lote_cantidad_disponible)} ${l.unidad_medida_codigo||''}</td><td class="p-3">${formatoFecha(l.lote_fecha_recepcion)}</td><td class="p-3">${formatoFecha(l.lote_fecha_vencimiento)}</td><td class="p-3">${l.estado_vencimiento}</td></tr>`).join(''); }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const body=Object.fromEntries(new FormData(e.target).entries()); body.producto_id=Number(body.producto_id); body.proveedor_id=Number(body.proveedor_id); body.ubicacion_id=body.ubicacion_id?Number(body.ubicacion_id):null; body.cantidad_ingresada=Number(body.cantidad_ingresada); try{ await api('/api/lotes',{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Lote registrado y stock actualizado'); e.target.reset(); await cargar(); }catch(err){setMensaje('mensaje',err.message,false);} });
+Promise.all([cargarSelects(),cargar()]).catch(e=>setMensaje('mensaje',e.message,false));
+
+  </script>
+</body>
+</html>

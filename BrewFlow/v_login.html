@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewFlow - Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+
+    <div class="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-md border border-gray-700">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-amber-500 tracking-wide">BrewFlow</h1>
+            <p class="text-gray-400 text-sm mt-2">Control de Acceso</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-300">Correo Electrónico</label>
+                <input type="email" id="email" required 
+                    class="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent" 
+                    placeholder="usuario@brewflow.cl">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-300">Contraseña</label>
+                <input type="password" id="password" required 
+                    class="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent" 
+                    placeholder="••••••••">
+            </div>
+
+            <div id="statusAlert" class="hidden p-3 rounded bg-red-900/50 border border-red-500 text-red-200 text-sm text-center">
+                El usuario se encuentra **inactivo**. Contacte al Administrador.
+            </div>
+
+            <button type="submit" 
+                class="w-full py-2 px-4 bg-amber-500 hover:bg-amber-600 text-gray-900 font-semibold rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-amber-500">
+                Ingresar al Sistema
+            </button>
+        </form>
+    </div>
+
+    <script src="app-common.js"></script>
+    <script>
+        const existingToken = localStorage.getItem('brewflow_token');
+        const existingRole = localStorage.getItem('brewflow_rol');
+
+        if (existingToken && existingRole) {
+            window.location.href = 'v_dashboard.html';
+        }
+
+        const form = document.getElementById('loginForm');
+        const statusAlert = document.getElementById('statusAlert');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usuario_correo: email, usuario_contrasena: password })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    statusAlert.textContent = data.message || 'Credenciales incorrectas';
+                    statusAlert.classList.remove('hidden');
+                    return;
+                }
+
+                localStorage.setItem('brewflow_token', data.token);
+                localStorage.setItem('brewflow_rol', String(data.rol));
+                localStorage.setItem('brewflow_rol_nombre', data.rol_nombre || '');
+                localStorage.setItem('brewflow_usuario', data.usuario?.nombres || email);
+                statusAlert.classList.add('hidden');
+                window.location.href = 'v_dashboard.html';
+            } catch (error) {
+                statusAlert.textContent = 'No se pudo conectar con el servidor';
+                statusAlert.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

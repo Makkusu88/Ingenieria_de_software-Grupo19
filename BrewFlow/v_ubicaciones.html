@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Ubicaciones bodega</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <div class="mb-4">
+      <button id="btnAgregar" type="button" class="bg-amber-500 text-gray-950 font-semibold rounded px-4 py-2 hover:bg-amber-600 transition">Agregar nueva ubicación</button>
+    </div>
+    <section id="formSection" class="hidden bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6"><h3 class="font-semibold text-lg mb-4">Registrar ubicación física</h3><form id="form" class="grid gap-4 md:grid-cols-5"><input name="codigo" required placeholder="Código: Z-A" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="nombre" required placeholder="Nombre" class="bg-gray-700 rounded p-2 border border-gray-600"><select name="tipo" required class="bg-gray-700 rounded p-2 border border-gray-600"><option value="zona">Zona</option><option value="estante">Estante</option><option value="nivel">Nivel</option><option value="posicion">Posición</option></select><select name="padre_id" id="padre" class="bg-gray-700 rounded p-2 border border-gray-600"><option value="">Sin padre</option></select><button class="bg-amber-500 text-gray-950 font-semibold rounded p-2">Registrar</button></form></section><section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">Código</th><th class="p-3 text-left">Nombre</th><th class="p-3 text-left">Tipo</th><th class="p-3 text-left">Padre</th><th class="p-3 text-left">Estado</th></tr></thead><tbody id="tabla"></tbody></table></div></section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Ubicaciones bodega', 'UR 2.3: estructura jerárquica de zonas, estantes y niveles.');
+    const formSection = document.getElementById('formSection');
+    const btnAgregar = document.getElementById('btnAgregar');
+    if (btnAgregar && formSection) {
+      btnAgregar.addEventListener('click', () => {
+        formSection.classList.toggle('hidden');
+        btnAgregar.textContent = formSection.classList.contains('hidden') ? 'Agregar nueva ubicación' : 'Ocultar formulario';
+      });
+    }
+
+    
+async function cargar(){ const data=await api('/api/ubicaciones',{headers:authHeaders}); document.getElementById('padre').innerHTML='<option value="">Sin padre</option>'+data.filter(u=>u.ubicacion_estado==='activo').map(u=>`<option value="${u.ubicacion_id}">${u.ubicacion_codigo} - ${u.ubicacion_nombre}</option>`).join(''); document.getElementById('tabla').innerHTML=data.map(u=>`<tr class="border-t border-gray-700"><td class="p-3">${u.ubicacion_codigo}</td><td class="p-3">${u.ubicacion_nombre}</td><td class="p-3">${u.ubicacion_tipo}</td><td class="p-3">${u.ubicacion_padre_nombre||'-'}</td><td class="p-3">${u.ubicacion_estado}</td></tr>`).join(''); }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const body=Object.fromEntries(new FormData(e.target).entries()); if(!body.padre_id) body.padre_id=null; else body.padre_id=Number(body.padre_id); try{ await api('/api/ubicaciones',{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Ubicación registrada correctamente'); e.target.reset(); cargar(); }catch(err){setMensaje('mensaje',err.message,false);} });
+cargar().catch(e=>setMensaje('mensaje',e.message,false));
+
+  </script>
+</body>
+</html>

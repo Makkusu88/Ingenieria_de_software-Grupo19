@@ -1,0 +1,58 @@
+<mxfile host="Electron">
+  <diagram name="Página-1" id="l1gCFt-bSsjVTpmMg9S0">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t791Ld7B00pno5XpUyXk-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="470" width="510" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" value="Sistema BrewFlow" vertex="1">
+          <mxGeometry height="430" width="242.5" x="237.5" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-2" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-3" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-13" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-14" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-4" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelPosition=center;align=center;fillColor=none;" value="Administrador" vertex="1">
+          <mxGeometry height="80" width="40" x="70" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-5" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-6" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-7" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-15" edge="1" parent="1" source="4dowzsr31PxIdxNrac4y-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="4dowzsr31PxIdxNrac4y-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-8" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;" value="Operador de producción" vertex="1">
+          <mxGeometry height="80" width="40" x="70" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando producción" vertex="1">
+          <mxGeometry height="70" width="153.75" x="276.25" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando estado del proceso productivo" vertex="1">
+          <mxGeometry height="70" width="153.75" x="276.25" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando insumos utilizados en producción" vertex="1">
+          <mxGeometry height="70" width="153.75" x="276.25" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="4dowzsr31PxIdxNrac4y-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando fecha estimada de finalización" vertex="1">
+          <mxGeometry height="70" width="153.75" x="276.25" y="400" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

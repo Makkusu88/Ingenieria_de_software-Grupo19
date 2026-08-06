@@ -1,0 +1,49 @@
+<mxfile host="Electron">
+  <diagram name="Página-1" id="0lls6KuSF4P-HS9lU7yz">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wfl7ji4QmBDwbXVBMesa-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="480" width="520" x="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" value="Sistema BrewFlow" vertex="1">
+          <mxGeometry height="430" width="242.5" x="337.5" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-2" edge="1" parent="1" source="DM9rMM1HDnB8qRjVXHTz-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="DM9rMM1HDnB8qRjVXHTz-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-4" edge="1" parent="1" source="DM9rMM1HDnB8qRjVXHTz-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="DM9rMM1HDnB8qRjVXHTz-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-5" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelPosition=center;align=center;fillColor=none;" value="Administrador" vertex="1">
+          <mxGeometry height="80" width="40" x="170" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-6" edge="1" parent="1" source="DM9rMM1HDnB8qRjVXHTz-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="DM9rMM1HDnB8qRjVXHTz-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-7" edge="1" parent="1" source="DM9rMM1HDnB8qRjVXHTz-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="DM9rMM1HDnB8qRjVXHTz-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-14" edge="1" parent="1" source="DM9rMM1HDnB8qRjVXHTz-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="DM9rMM1HDnB8qRjVXHTz-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-9" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;" value="Supervisor" vertex="1">
+          <mxGeometry height="80" width="40" x="170" y="375" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Definiendo niveles mínimos y máximos de stock" vertex="1">
+          <mxGeometry height="70" width="153.75" x="376.25" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Consultando alertas de vencimiento próximo" vertex="1">
+          <mxGeometry height="70" width="153.75" x="376.25" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Listando productos por rango de vencimiento" vertex="1">
+          <mxGeometry height="70" width="153.75" x="376.25" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="DM9rMM1HDnB8qRjVXHTz-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Consultando alertas de stock bajo" vertex="1">
+          <mxGeometry height="70" width="153.75" x="376.25" y="470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

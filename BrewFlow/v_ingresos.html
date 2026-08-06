@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>BrewFlow - Ingresos de stock</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6"><div id="mensaje" class="hidden"></div>
+    <div class="mb-4">
+      <button id="btnAgregar" type="button" class="bg-amber-500 text-gray-950 font-semibold rounded px-4 py-2 hover:bg-amber-600 transition">Agregar nuevo ingreso</button>
+    </div><section id="formSection" class="hidden bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6"><h3 class="font-semibold text-lg mb-4">Registrar ingreso de producto</h3><p class="text-sm text-gray-400 mb-4">El ingreso crea el lote, asocia proveedor y actualiza el stock en una transacción.</p><form id="form" class="grid gap-4 md:grid-cols-3"><select name="producto_id" id="productos" required class="bg-gray-700 rounded p-2 border border-gray-600"></select><input name="cantidad_ingresada" type="number" min="0.01" step="0.01" required placeholder="Cantidad" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="lote_codigo" required placeholder="Código de lote" class="bg-gray-700 rounded p-2 border border-gray-600"><select name="proveedor_id" id="proveedores" required class="bg-gray-700 rounded p-2 border border-gray-600"></select><select name="ubicacion_id" id="ubicaciones" class="bg-gray-700 rounded p-2 border border-gray-600"><option value="">Sin ubicación</option></select><input name="fecha_recepcion" type="date" required class="bg-gray-700 rounded p-2 border border-gray-600"><input name="fecha_vencimiento" type="date" required class="bg-gray-700 rounded p-2 border border-gray-600"><input name="observacion" placeholder="Observación" class="md:col-span-2 bg-gray-700 rounded p-2 border border-gray-600"><button class="bg-amber-500 text-gray-950 font-semibold rounded p-2">Registrar ingreso</button></form></section><section class="bg-gray-800 rounded-lg border border-gray-700 p-5"><h3 class="font-semibold text-lg mb-3">Validación aplicada</h3><ul class="list-disc pl-5 text-sm text-gray-300 space-y-1"><li>El producto debe estar activo.</li><li>El proveedor debe estar activo.</li><li>La fecha de vencimiento debe ser posterior a la fecha de ingreso.</li><li>El stock del producto aumenta solo si la transacción completa termina correctamente.</li></ul></section></main>
+  <script src="app-common.js"></script>
+  <script>montarLayout('Ingresos de stock', 'UR 4.2: producto, cantidad, lote, proveedor y fecha.');
+    const formSection = document.getElementById('formSection');
+    const btnAgregar = document.getElementById('btnAgregar');
+    if (btnAgregar && formSection) {
+      btnAgregar.addEventListener('click', () => {
+        formSection.classList.toggle('hidden');
+        btnAgregar.textContent = formSection.classList.contains('hidden') ? 'Agregar nuevo ingreso' : 'Ocultar formulario';
+      });
+    }
+
+async function cargarSelects(){ const [productos,proveedores,ubicaciones]=await Promise.all([api('/api/productos',{headers:authHeaders}),api('/api/proveedores',{headers:authHeaders}),api('/api/ubicaciones',{headers:authHeaders})]); document.getElementById('productos').innerHTML=productos.filter(p=>p.producto_estado==='activo').map(p=>`<option value="${p.producto_id}">${p.producto_codigo} - ${p.producto_nombre} (${p.unidad_medida_codigo})</option>`).join(''); document.getElementById('proveedores').innerHTML=proveedores.filter(p=>p.proveedor_estado==='activo').map(p=>`<option value="${p.proveedor_id}">${p.proveedor_nombre}</option>`).join(''); document.getElementById('ubicaciones').innerHTML='<option value="">Sin ubicación</option>'+ubicaciones.filter(u=>u.ubicacion_estado==='activo').map(u=>`<option value="${u.ubicacion_id}">${u.ubicacion_codigo} - ${u.ubicacion_nombre}</option>`).join(''); }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const body=Object.fromEntries(new FormData(e.target).entries()); body.producto_id=Number(body.producto_id); body.proveedor_id=Number(body.proveedor_id); body.ubicacion_id=body.ubicacion_id?Number(body.ubicacion_id):null; body.cantidad_ingresada=Number(body.cantidad_ingresada); try{ await api('/api/movimientos/ingresos',{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Ingreso registrado en PostgreSQL y stock actualizado'); e.target.reset(); await cargarSelects(); }catch(err){setMensaje('mensaje',err.message,false);} });
+cargarSelects().catch(e=>setMensaje('mensaje',e.message,false));
+</script>
+</body></html>

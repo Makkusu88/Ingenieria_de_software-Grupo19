@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <section id="cards" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"></section>
+<section class="mt-6 bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+  <div class="p-4 border-b border-gray-700"><h3 class="font-semibold text-lg">Existencias por producto</h3></div>
+  <div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-900 text-gray-300"><tr><th class="p-3 text-left">Código</th><th class="p-3 text-left">Producto</th><th class="p-3 text-left">Categoría</th><th class="p-3 text-left">Stock</th><th class="p-3 text-left">Lotes</th><th class="p-3 text-left">Próximo vencimiento</th></tr></thead><tbody id="tabla"></tbody></table></div>
+</section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Dashboard', 'Resumen operativo conectado a PostgreSQL.');
+    
+async function cargar(){
+  try{
+    const data=await api('/api/dashboard/resumen',{headers:authHeaders});
+    const r=data.resumen;
+    const items=[
+      ['Productos activos',r.productos_activos],['Unidades activas',r.unidades_activas],['Proveedores activos',r.proveedores_activos],['Ubicaciones activas',r.ubicaciones_activas],
+      ['Lotes por vencer',r.lotes_proximos_vencer],['Lotes vencidos',r.lotes_vencidos],['Salidas del mes',formatoNumero(r.salidas_mes)]
+    ];
+    document.getElementById('cards').innerHTML=items.map(([k,v])=>`<div class="bg-gray-800 border border-gray-700 rounded-lg p-5"><div class="text-gray-400 text-sm">${k}</div><div class="text-3xl font-bold text-amber-400 mt-2">${v}</div></div>`).join('');
+    document.getElementById('tabla').innerHTML=(data.detalles||[]).map(p=>`<tr class="border-t border-gray-700"><td class="p-3">${p.producto_codigo||'-'}</td><td class="p-3 font-medium">${p.producto_nombre}</td><td class="p-3">${p.producto_categoria||'-'}</td><td class="p-3">${formatoNumero(p.producto_stock_actual)} ${p.unidad_medida_codigo||''}</td><td class="p-3">${p.lotes_registrados}</td><td class="p-3">${formatoFecha(p.proximo_vencimiento)}</td></tr>`).join('') || '<tr><td class="p-3 text-gray-400" colspan="6">Sin datos</td></tr>';
+  }catch(e){ setMensaje('mensaje',e.message,false); }
+}
+cargar();
+
+  </script>
+</body>
+</html>

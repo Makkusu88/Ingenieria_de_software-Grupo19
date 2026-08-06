@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewFlow - Unidades de medida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <main id="main" class="lg:ml-72 p-6">
+    <div id="mensaje" class="hidden"></div>
+    <section class="bg-gray-800 rounded-lg border border-gray-700 p-5 mb-6"><h3 class="font-semibold text-lg mb-4">Registrar unidad de medida personalizada</h3><form id="form" class="grid gap-4 md:grid-cols-4"><input name="codigo" required placeholder="Código: barril" class="bg-gray-700 rounded p-2 border border-gray-600"><input name="nombre" required placeholder="Nombre" class="bg-gray-700 rounded p-2 border border-gray-600"><select name="clasificacion" required class="bg-gray-700 rounded p-2 border border-gray-600"><option value="masa">Masa</option><option value="volumen">Volumen</option><option value="unidad">Unidad</option><option value="contenedor">Contenedor</option><option value="otro">Otro</option></select><button class="bg-amber-500 text-gray-950 font-semibold rounded p-2">Registrar</button></form></section><section class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden"><table class="w-full text-sm"><thead class="bg-gray-900"><tr><th class="p-3 text-left">ID</th><th class="p-3 text-left">Código</th><th class="p-3 text-left">Nombre</th><th class="p-3 text-left">Clasificación</th><th class="p-3 text-left">Estado</th></tr></thead><tbody id="tabla"></tbody></table></section>
+  </main>
+  <script src="app-common.js"></script>
+  <script>
+    montarLayout('Unidades de medida', 'UR 2.1: registro con identificador único y clasificación.');
+    
+async function cargar(){ const data=await api('/api/unidades',{headers:authHeaders}); document.getElementById('tabla').innerHTML=data.map(u=>`<tr class="border-t border-gray-700"><td class="p-3">${u.unidad_medida_id}</td><td class="p-3">${u.unidad_medida_codigo}</td><td class="p-3">${u.unidad_medida_nombre}</td><td class="p-3">${u.unidad_medida_clasificacion}</td><td class="p-3">${u.unidad_medida_estado}</td></tr>`).join(''); }
+document.getElementById('form').addEventListener('submit',async e=>{ e.preventDefault(); const body=Object.fromEntries(new FormData(e.target).entries()); try{ await api('/api/unidades',{method:'POST',headers:jsonHeaders,body:JSON.stringify(body)}); setMensaje('mensaje','Unidad registrada correctamente'); e.target.reset(); cargar(); }catch(err){setMensaje('mensaje',err.message,false);} });
+cargar().catch(e=>setMensaje('mensaje',e.message,false));
+
+  </script>
+</body>
+</html>

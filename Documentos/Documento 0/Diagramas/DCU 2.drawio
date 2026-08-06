@@ -1,0 +1,55 @@
+<mxfile host="Electron">
+  <diagram name="Página-1" id="1mEkNmqnydcap-3Bwwkj">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Ag1cWIiptodnhff6TXpx-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="400" width="500" x="60" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" value="Sistema BrewFlow" vertex="1">
+          <mxGeometry height="360" width="226" x="264" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-5" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-6" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-7" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-20" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-8" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelPosition=center;align=center;fillColor=none;" value="Administrador" vertex="1">
+          <mxGeometry height="80" width="40" x="110" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-22" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-23" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-24" edge="1" parent="1" source="qzIrvXqZuHlYcr5-z301-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="qzIrvXqZuHlYcr5-z301-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-11" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=none;" value="Operador de inventario" vertex="1">
+          <mxGeometry height="80" width="40" x="110" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando unidades de medida" vertex="1">
+          <mxGeometry height="60" width="130" x="310" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Registrando proveedores" vertex="1">
+          <mxGeometry height="60" width="120" x="315" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Gestionando ubicaciones de bodega" vertex="1">
+          <mxGeometry height="60" width="120" x="315" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="qzIrvXqZuHlYcr5-z301-19" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;" value="Asignando ubicación a producto" vertex="1">
+          <mxGeometry height="60" width="120" x="315" y="335" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
